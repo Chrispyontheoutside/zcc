@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zendesk Ticket Viewer 🖥</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    
+</head>
+<body>
+    <div class = "container">
+        <div class = "content">
+                <h1 class = "title has-text-centered has-text-primary mt-6 has-text-weight-bold">Zendesk Ticket Viewer</h1>
+                {{ pagination.info}}
+                {{ pagination.links }}
+                <table class = "table my-6 is-hoverable">
+                    <thead class = "has-text-weight-bold">
+                    <tr>
+                        <td>Number (id)</td>
+                        <td>Subject</td>
+                        <td>Status</td>
+                        <td>Priority</td>
+                        <td>Created At</td>
+                    </tr>
+                </thead>
+                    {% for ticket in tickets %}
+                    <TR >
+                       <TD href = "/ticket/{{ ticket.id }}" class="c2" href = "">{{ticket.id}}</TD>
+                       <TD href = "/ticket/{{ ticket.id }}" class="c3"><a class = "has-text-link" href = "/ticket/{{ ticket.id }}" >{{ticket.subject}}</a></TD>
+                       <TD class="c4"><SPAN>{{ticket.status}}</SPAN></TD>
+                       <TD class="c5 {% if ticket.priority == "urgent" or ticket.priority == "high" %} {{"has-text-danger"}} {% endif %}"><SPAN>{{ticket.priority}}</SPAN></TD>
+                       <TD class="c5"><SPAN>{{ticket.created_at}}</SPAN></TD>
+                    </TR>
+                    {% endfor %}
+                </table>
+    </div>
+</body>
+</html>
+
