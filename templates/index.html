@@ -30,6 +30,7 @@
                        <TD href = "/ticket/{{ ticket.id }}" class="c2" href = "">{{ticket.id}}</TD>
                        <TD href = "/ticket/{{ ticket.id }}" class="c3"><a class = "has-text-link" href = "/ticket/{{ ticket.id }}" >{{ticket.subject}}</a></TD>
                        <TD class="c4"><SPAN>{{ticket.status}}</SPAN></TD>
+                       <!--If the ticket priority is urgent or high, add CSS class has-text-danger (default bulma class for red)-->
                        <TD class="c5 {% if ticket.priority == "urgent" or ticket.priority == "high" %} {{"has-text-danger"}} {% endif %}"><SPAN>{{ticket.priority}}</SPAN></TD>
                        <TD class="c5"><SPAN>{{ticket.created_at}}</SPAN></TD>
                     </TR>

@@ -1,32 +1,41 @@
 # Zendesk Coding Challenge by Chris Peter Francis
 
 ## Description
-This is my attempt at the Zendesk Coding Challenge for the Cloud Engineering Co-Op Role. In the challenge, participants were aksed to build a application (GUI or CLI) to serve tickets from the Zendesk Ticket API using any technology stack. 
+This is my attempt at the Zendesk Coding Challenge for the Cloud Engineering Co-Op Role. In the challenge, participants were asked to build a application (GUI or CLI) to serve tickets from the Zendesk Ticket API using any technology stack. 
 ## Objectives
 - Retrieve Tickets from the Zendesk Ticket API
-- Display them in a list (Paginate if ticket count > 25)
-
+- Request all the tickets from the account
+- Display them in a list 
+- Display individual ticket details
+- Paginate if ticket count > 25
 
 ## Preview 
 - Ticket Viewer
-![Imgur](https://i.imgur.com/UdAb3VZ.png)
+![Imgur](https://i.imgur.com/JoIgcXk.png)
 - Single Ticket View
-![Imgur](https://i.imgur.com/ovfb1P6.png)
+![Imgur](https://i.imgur.com/Vk2NZkI.png)
+- Error Page
+![Imgur](https://i.imgur.com/bBUPcdN.png)
 
-## Live Demo
-- Application is running on an EC2 Instance.
+## Installation Prerequisites
+- [python 3.8.2, pip 19.2.3]
+- `pip install -r requirements.txt`
 
-## Assumptions
-- User knows how to use Docker or is able to install python packages.
-- User provides login information and company domain via Docker secrets or Environment Variables.
-## Installation
-- I have containerized the application to avoid having to install python packages.
-- If you would like to run the un-containerized application, I have included the requirements.txt for pip.
+## Authentication
+- In the credentials.json file, update the email, token and subdomain to the appropriate data.
 
+## Running 
+- versions: `python app.py`
+- `http://127.0.0.1:5000` in your prefered browser :)
+
+## Testing
+- Created unit tests using Python's unittest module
+- `python -m unittest`
 
 ## Improvements with Time / Tasks
-- Use Token-based authentication to take a least-privelege route.
-- Work on effeciency.
+- Work on effeciency
+- Write Flask tests
+- Live demo
 
 ### Tools Used
 - Zendesk Ticket API
@@ -36,8 +45,4 @@ This is my attempt at the Zendesk Coding Challenge for the Cloud Engineering Co-
     - requests
     - unittest
 - Bulma
-- Docker
-- Github Actions
   
-## Conclusion
-This was a very fun project to work on, hacking away at writing code quickly, prototyping and using a Kanban board to eat away at the project 😁.
