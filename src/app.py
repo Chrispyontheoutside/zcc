@@ -26,6 +26,7 @@ def serve_ticket(id):
 
 #Create object with credentials (email, token, subdomain)
 auth = auth.auth()
+#Create tickets list and create tickets using authentication information
 tickets_list = tickets.tickets()
-tickets_list.create_tickets(auth.email,auth.token,auth.subdomain)
+tickets_list.create_tickets(auth.email,auth.token,auth.link)
 app.run(debug=True)

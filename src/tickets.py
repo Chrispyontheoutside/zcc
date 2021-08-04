@@ -23,6 +23,7 @@ class tickets(object):
         for paginatedItem in range(len(self.tickets)):
             total_num_tickets += len(self.tickets[paginatedItem]["tickets"])
         return total_num_tickets
+    #Creates tickets, retreives error, if any and status code from response
     def create_tickets(self,email,token,subdomain):
         self.ticket_request = ticket_request.ticket_request()
         self.tickets = self.ticket_request.retrieve_tickets(email,token,subdomain)

@@ -1,9 +1,10 @@
 import json
+TICKETS_ENDPOINT = ".zendesk.com/api/v2/tickets.json?page[size]=25"
 class auth(object):
     def __init__(self):
         self.email = None
         self.token = None
-        self.subdomain = None
+        self.link = None
         self.set_credentials(self.read_credentials())
     # Read credentials from the file, return python dictionary object
     def read_credentials(self):
@@ -14,6 +15,5 @@ class auth(object):
     def set_credentials(self,credentials):
         self.email = credentials["email"]
         self.token = credentials["token"]
-        self.subdomain = credentials["subdomain"]
-
+        self.link = "https://"+credentials["subdomain"]+TICKETS_ENDPOINT
 

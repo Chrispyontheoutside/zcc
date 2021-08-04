@@ -7,14 +7,13 @@ class ticket_request(object):
         self.error = None
         self.status_code = None
     ## Sends a HTTP requests via requests, exits if a connection error is thrown
-    def get_http_repsonse(self, endpoint, email, token):
-        if(type(endpoint) is str):
+    def get_http_repsonse(self, link, email, token):
+        if(type(link) is str):
             try:
-                return requests.get(endpoint, auth = (email+'/token', token),timeout=1)
+                return requests.get(link, auth = (email+'/token', token),timeout=1)
             except requests.ConnectionError:
                 self.error = "Network problem, could not connect (DNS failure, refused connection, etc)"
-            except:
-                self.error = "Unexpected Error 🐳"
+
         else:
             raise ValueError("The endpoint (url) was not a string")
     # Sets status code of the response
@@ -24,11 +23,6 @@ class ticket_request(object):
             return True
         else:
             self.error = response.json()["error"]
-    def return_response_json(self,response):
-            try:
-                return response.json()
-            except:
-                self.error = "Could not return json"
     # Returns the next endpoint for the page
     def return_new_endpoint(self,responseJson):
             return responseJson["links"]["next"]
@@ -51,19 +45,18 @@ class ticket_request(object):
             ticket["updated_at"] = self.convert_time(ticket["updated_at"])
         return responseJson
     #Sets value of tickets
-    def retrieve_tickets(self,email,token,subdomain):
-        self.link = "https://"+subdomain+TICKETS_HTTPS_ENDPOINT
-        response = self.get_http_repsonse(self.link,email,token)
+    def retrieve_tickets(self,email,token,link):
+        response = self.get_http_repsonse(link,email,token)
         if(self.error == None and self.return_status_code(response)):
             tickets = []
-            tickets.append(self.ticket_time_set(self.return_response_json(response)))
+            tickets.append(self.ticket_time_set(response.json()))
             #Check last item in tickets to see if there are still tickets to request
             while(self.check_hasmore(tickets[-1])):
                 #response is a new response from the endpoint provided from previous response
                 response = self.get_http_repsonse(self.return_new_endpoint(tickets[-1]),email,token)
                 if(not self.return_status_code(response)):
                     return self.status_code
-                tickets.append(self.ticket_time_set(self.return_response_json(response)))
+                tickets.append(self.ticket_time_set(response.json()))
             return tickets
         else:
             return self.error
